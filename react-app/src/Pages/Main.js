@@ -1,19 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './Main.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHistory } from '@fortawesome/free-solid-svg-icons'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import UserContext from '../UserContext';
 
 const Main = () => {
   const [result, setResult] = useState('');
   const [viewResult, setviewResult] = useState('')
   const [history, setHistory] = useState([]); 
   const [value, setValue] = useState("");
+  const {user}  = useContext(UserContext);
+
+  console.log("Information of User: ")
+  console.log(user)
+  const finalUser = user.username
+  console.log(finalUser)
+
+  
 
   function handleClick(e) {
     const inputValue = e.target.name;
     if (inputValue === "-") {
       setValue(value => - value);
+      console.log(value)
     }
     if (inputValue === '=') {
       calculate();
@@ -48,7 +58,7 @@ const Main = () => {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            username: "virgo06",
+            username: finalUser,
             calcStrings: allString
           }),
         });
@@ -74,7 +84,7 @@ const Main = () => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          username: "virgo06"          
+          username: finalUser         
         })
       });
       const data = await response.json();
@@ -96,7 +106,7 @@ const Main = () => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        username: "virgo06",
+        username: finalUser,
         calcStrings: []
       })
     }) 
@@ -158,10 +168,13 @@ const Main = () => {
       
       <div className='calculator2'>
       <p>
+      <h4 className='userHistory'>{finalUser}</h4>
       <span>History</span>
       <span className='trashIcon' onClick={deleteHistory}><FontAwesomeIcon icon={faTrashAlt} size="m"/></span>
       </p>
+      
     <div className="history-container">
+    
       {history.length > 0 ? (
         history.slice(0).reverse().map((item, index) => (
           <input key={index} className="answer2" type="text" value={item} disabled />
@@ -169,6 +182,7 @@ const Main = () => {
       ) : (
         <input className="answer2" type="text" value="Empty history make some calculations" disabled></input>
       )}
+
     </div>
 
     </div>

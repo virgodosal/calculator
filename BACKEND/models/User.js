@@ -10,8 +10,12 @@ const userSchema = new mongoose.Schema({
     type : Boolean,
     default : false
   },
-  timestamp : {
+    timestamp : {
     type : Date,
+    required : false
+  },
+    comments : {
+    type : [String],
     required : false
   },
    calcStrings: {

@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Swal from 'sweetalert2';
+import UserContext from '../UserContext';
+import {Navigate} from 'react-router-dom';
 
 
 const Register = () => {
   const [username, setUsername] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const {user}  = useContext(UserContext);
+
+  const FinalUser = user.username
+  console.log(FinalUser)
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -46,6 +52,9 @@ const Register = () => {
   };
 
   return (
+  (user.id !== null) ?
+  (alert('You are already registered!'), <Navigate to="/main" />)
+    :
     <div id='userRegister'>
       <div>
         <h1 className='headRegister'>REGISTER</h1>

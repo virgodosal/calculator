@@ -337,3 +337,55 @@ border-radius: 15px;
     font-size: 20px;
   }
   
+  .userHistory {
+    align-items: center;
+    margin: 0px;
+    margin-bottom:  0px;
+    color: #ffa733;
+  }
+
+  .buttonComment {
+      background-color: rgb(25, 182, 255);
+      color: rgb(0, 0, 0);
+      width: 30%;
+      border-radius: 20px;
+      border: none;
+      text-decoration: none;  
+
+  }
+  .buttonComment:hover {
+    background-color: rgb(255, 180, 67);
+  
+  }
+
+  .textArea {
+    color: #292A2D;
+    font-size: 20px ;
+    width: 60px;
+    text-align: justify;
+    background-color: #cecece;
+    border: none;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 20px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+
+  .textArea2 {
+    color: #292A2D;
+    font-size: 20px ;
+    width: 60px;
+    text-align: justify;
+    background-color: #cecece;
+    border: none;
+    margin: 0px;
+    padding: 20px;
+    border-radius: 10px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+
+  .Page {
+    color: black;
+    font-weight: bolder;
+
+  }

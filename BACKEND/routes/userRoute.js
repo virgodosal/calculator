@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const userController = require("../controllers/userController")
+const auth = require("../auth")
 
 
 router.post("/registers", (request, res) => {
@@ -31,8 +32,25 @@ router.post("/clearHistory", (request, res) => {
 	userController.delHistory(request.body).then(resultFromController => res.send(resultFromController));
 });
 
+router.post("/:userId/userDetails",/* auth.verify,*/ (request, respond) => {
+	const userId = request.params.userId;
+
+	const data = {
+		userId: userId
+	  };
+
+	  userController.getUserDetails(data).then(resFromManipulator => respond.send(resFromManipulator));
+});
 
 
+router.get("/details", auth.verify, (req, res) => {
+	const userData = auth.decode(req.headers.authorization);
+	userController.getProfile({id: userData.id}).then(resultFromController => res.send(resultFromController))
+});
+
+router.post("/comments", (request, res) => {
+	userController.comments(request.body).then(resultFromController => res.send(resultFromController));
+});
 
 
 

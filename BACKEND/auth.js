@@ -5,6 +5,7 @@ module.exports.createAccessToken = (user) => {
 	
 	const data = {
 		id: user._id,
+		username: user.username,
 		isAdmin: user.isAdmin
 	};
 

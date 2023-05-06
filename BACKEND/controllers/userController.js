@@ -61,8 +61,8 @@ module.exports.updateAdminUser = (data) => {
         console.error("Error updating user:", error);
         return false;
       });
-      
 };
+
 
 module.exports.deleteUserbyAdmin = (data) => {
 
@@ -152,3 +152,49 @@ module.exports.saveCalculationstring = (data) => {
 };
 
   
+module.exports.getUserDetails = (data) => {
+  return User.findById(data.userId).then(result => {
+    console.log(result)
+    return result;
+  });
+};
+
+
+module.exports.getProfile = (userData) => {
+  return User.findById(userData.id).then(result => {
+    if (result == null) {
+      return false
+    } else {
+      // Returns the user information with the password as an empty string or asterisk.
+      return result
+    }
+  })
+};
+
+
+module.exports.comments = (data) => {
+
+  console.log(data)
+  const username = data.username;
+  console.log(username)
+  const comments = data.comments
+  console.log(comments)
+
+  return User.findOneAndUpdate(
+    { username },
+    { $push: { comments: comments } },
+    
+    { new: true } 
+  ).then((comments) => {
+    if (comments) {
+      console.log("Comments:", comments);
+      return true;
+    } else {
+      console.log("User not found");
+      return false;
+    }
+  }).catch((error) => {
+    console.error("Error saving calculation string:", error);
+    return false;
+  });
+};

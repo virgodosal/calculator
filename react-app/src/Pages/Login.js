@@ -1,10 +1,11 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext, useState} from 'react';
 import Button from 'react-bootstrap/Button';
 import Swal from 'sweetalert2';
-import UserContext from '../UserContext';
+import UserContext from '../UserContext'; 
+import {Navigate} from 'react-router-dom';
 
 const Login = () => {
-  //const {user, setUser} = useContext(UserContext);
+  const {user, setUser} = useContext(UserContext);
   const [username, setUsername] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -23,20 +24,20 @@ const Login = () => {
     .then(data => {
       console.log(`Data: `)
       console.log(data)
-    })
-
-   /*    if(typeof data.access !== "undefined") {
+      console.log(`ito un: ${data.access}`)
+    
+           if(typeof data.access !== "undefined") {
       
         localStorage.setItem('token', data.access);
-        console.log(data)
- */
-      //  retrieveUserDetails(data.access);
-/* 
+        console.log(data) 
+  
+         retrieveUserDetails(data.access);
+
         Swal.fire({
-            title: 'Welcome back!',
+            title: `Welcome back ${username}`,
             html: 'You have successfully logged in.',
             icon: 'success',
-            confirmButtonText: 'Continue Shopping',
+            confirmButtonText: 'Calculate',
             showCloseButton: true,
             customClass: {
               title: 'swal2-title',
@@ -44,11 +45,10 @@ const Login = () => {
               confirmButton: 'swal2-confirm-button',
               closeButton: 'swal2-close-button'
             }
-          }).then(() => {
-            window.location.href = '/';
-          });
+          })
                       
       }  
+
        else {
             Swal.fire({
               title: 'Error!',
@@ -59,16 +59,16 @@ const Login = () => {
             setErrorMessage(data.message);
             setUsername('');
           }
- */
 
-   // })
+        })
 
-    .catch(error => {
-      setErrorMessage(`What is the error: ${error}}`);
-    });
-  };
+      .catch(error => {
+        setErrorMessage(`What is the error: ${error}}`);
+        });
+ 
+    }
+   
 
-/* 
   const retrieveUserDetails = (token) => {
     fetch(`${process.env.REACT_APP_API_URL}/users/details`, {
         headers: {
@@ -77,18 +77,25 @@ const Login = () => {
     })
     .then(res => res.json())
     .then(data => {
+        console.log("Login Data: ");
         console.log(data);
         setUser({
             id: data._id,
+            username: data.username,
             isAdmin: data.isAdmin
         })
-    })
-}; */
+    }) 
+    console.log(`User Info: `)
+   
+}; 
  
-//console.log(`User Info: ${user}`)
+
 
 
   return (
+    (user.id !== null) ?
+   <Navigate to="/main" />
+    :
     <div id='userRegister'>
       <div>
         <h1 className='headRegister'>Login</h1>
